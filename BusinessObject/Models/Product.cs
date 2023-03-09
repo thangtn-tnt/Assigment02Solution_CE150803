@@ -14,7 +14,7 @@ namespace BusinessObject.Models
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
-        public Category? Category { get; set; }
+        public virtual Category Category { get; set; }
         public string ProductName { get; set; }
         public decimal Weight { get; set; }
         public decimal UnitPrice { get; set; }

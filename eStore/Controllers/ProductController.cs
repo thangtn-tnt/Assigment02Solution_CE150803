@@ -21,17 +21,7 @@ namespace eStore.Controllers
             return View();
         }
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
-
-        public IActionResult Delete()
-        {
-            return View();
-        }
-
-        public IActionResult Detail(int id)
+        public IActionResult Edit(int id)
         {
             return View();
         }
