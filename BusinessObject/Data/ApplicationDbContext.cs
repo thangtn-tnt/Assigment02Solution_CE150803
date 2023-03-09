@@ -1,16 +1,18 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessObject.Data
 {
     public class ApplicationDbContext : IdentityDbContext
-    {        
+    {   
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()
@@ -38,7 +40,7 @@ namespace BusinessObject.Data
                 new Category { CategoryId = 7, CategoryName = "Produce" },
                 new Category { CategoryId = 8, CategoryName = "Seafood" }
             );
-
+          
             base.OnModelCreating(optionsBuilder);
         }
     }

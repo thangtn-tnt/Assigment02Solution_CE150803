@@ -1,0 +1,80 @@
+﻿@using BusinessObject.Models;
+@model Product;
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<form asp-action="Create">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Create Product</h1>
+        <hr />
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row">
+
+            <div class="col-3">
+                <label asp-for="ProductName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-9 pb-3">
+                <input asp-for="ProductName" class="form-control" />
+            </div>
+
+            <div class="col-3">
+                <label asp-for="Category.CategoryName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-9 pb-3">
+                <select asp-for="Category.CategoryName" class="form-control"></select>
+            </div>
+
+            <div class="col-3">
+                <label asp-for="Weight" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-9 pb-3">
+                <input asp-for="Weight" class="form-control" />
+            </div>
+
+            <div class="col-3">
+                <label asp-for="UnitPrice" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-9 pb-3">
+                <input asp-for="UnitPrice" class="form-control" />
+            </div>
+
+            <div class="col-3">
+                <label asp-for="UnitsInStock" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-9 pb-3">
+                <input asp-for="UnitsInStock" class="form-control" />
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="Index" asp-controller="Product" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Create" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:44357/api/Product/Categories",
+                data: "{}",
+                success: function (data) {
+                    var s = '<option value="-1">Pickup Category</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data[i])
+                        s += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
+                    }
+                    $("#Category_CategoryName").html(s);
+                }
+            });
+        });
+    </script>
+}

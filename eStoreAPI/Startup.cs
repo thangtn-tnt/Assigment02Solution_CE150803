@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.IRepository;
+using DataAccess.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,10 +30,13 @@ namespace eStoreAPI
         {
 
             services.AddControllers();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eStoreAPI", Version = "v1" });
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +54,11 @@ namespace eStoreAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
